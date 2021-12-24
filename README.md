@@ -130,10 +130,74 @@ Suponiendo que un bloque se genera cada 800 ms, para que un bloque sea totalment
 
 ## Sealevel
 
+Es el procesamiento en paralelo de decenas de miles de contratos inteligentes.
 
+A diferencia de la EVM - Ethereum Virtual Machine que solo puede modificar un estado a la vez, Solana puede modificar muchos estados con varios procesos en background.
+
+[![16](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/16.png?raw=true "16")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/16.png?raw=true "16")
+
+Es necesario entender los conceptos de programas y cuentas, en Solana todo son cuentas desde los programas hasta la información dentro de estas. Todas las cuentas contienen una llave pública. saldo, datos y la llave pública del propietario.
+
+[![17](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/17.png?raw=true "17")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/17.png?raw=true "17")
+
+Consideraciones: 
+
+- Los programas solo pueden cambiar los datos de las cuentas que poseen.
+- Solo pueden debitar cuentas de su propiedad.
+- Cualquier programa puede acreditar cualquier cuenta. 
+- Cualquier programa puede leer cualquier cuenta.
+
+Solana es como un sistema operativo con herramientas previamente diseñadas para sus usuarios, esto se le conoce como el System program que de forma predeterminada, es propietario de todas las cuentas cuando inician.
+
+- Es el único programa que puede asignar la propiedad de la cuenta.
+- Único programa que puede asignar datos inicializados en cero.
+
+La cesión de propiedad de la cuenta solo puede ocurrir una vez en la vida de una cuenta.
+
+Como un cliente puede cargar programas customizados en la red de Solana, programas adaptados a las preferencias de su usuario o propietario, en especial de tal manera que se distinga de cualquier otro:
+
+[![18](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/18.png?raw=true "18")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/18.png?raw=true "18")
+
+> No se ejecutará si no está marcado como Ejecutable.
+
+Cada una de las transacciones esta conformada por instrucciones, estas hacen referencia a un programa, las instrucciones de ese programa y todas las cuentas que están relacionadas.
+
+[![19](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/19.png?raw=true "19")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/19.png?raw=true "19")
+
+En tiempo de ejecución funciona de la siguiente manera:
+
+[![20](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/20.png?raw=true "20")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/20.png?raw=true "20")
+
+Los smart contracts de Solana hacen uso del lenguaje C y de Rust, para crear un ecosistema de programación de smart contracts unico. Esto ofrece una gran capacidad de palelización de la ejecución de smart contracts. Sealevel es el nombre que han dado los desarrolladores de Solana a estas capacidades.
+
+Mediante esta función se permite la capacidad de leer, ejecutar y escribir instrucciones de manera paralela dentro de la capa de ejecución de smart contracts de Solana. Un smart contract puede eecutar múltiples acciones simultanemente, mientras que en Ethereum y EOS solo se puede una acción a la vez.
+
+Sealevel lo que permite a Solana es una mayor escalabilidad que otras redes blockchain. Podría llegar, con la integración de suficientes nodos de alto rendimiento soportar hasta 500.000 transacciones por segundo. Adicionalmente se elimina la necesidad de una segunda capa para mejorar la escalabilidad.
+
+Sealevel utiliza en la arquitectura CUDA, tecnología de hardware de NVIDIA que se basa en una matriz escalable de multiprocesadores de trasminsión miltiproceso.
+
+Aunque solo se puede hacer una entrada por multiprocesador puede generar multiples procesos para aumentar las entradas a un mismo contrato inteligente.
 
 ## Pipelining
+
+Es una unidad de procesamiento de transacciones para la optimización de la validación.
+
+Se hace la compraración con el concepto de producción de autos en serie de Henry Ford, donde no se pueden dejar en espera los brazos robots mientras otro termina su tarea, sino que se deben programar de tal forma que se cree una cadena de producción sin esos tiempos de espera.
+
+[![21](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/21.png?raw=true "21")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/21.png?raw=true "21")
+
+Lo mismo hace Solana con el proceso llamano canalización / pipelining, que es la TPU - Unidad de Procesamiento de Transacciones. Se genera una captura de datos a nivel del Kernel, luego la firma y verificación en la GPU, el proceso transaccional de Banking se hace en la CPU y por último la escritura en Kernel, ocupando la mayor capacidad del hardware optimizando recursos.
+
+[![22](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/22.png?raw=true "22")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/22.png?raw=true "22")
+
 ## Cloudbreak
+
+Es una base de datos de escalado de cuentas horizontal.
+
+Algunas blockchain utilizan LevelDB se usa como base de datos de backend para IndexedDB de Google Chrome y es uno de los backends compatibles con Riak.  Además, Bitcoin Core y go-ethereum almacenan los metadatos de la cadena de bloques utilizando una base de datos LevelDB.  Minecraft Bedrock Edition utiliza una versión modificada para el almacenamiento de datos de fragmentos y entidades.  Autodesk AutoCAD 2016 también utiliza LevelDB.
+
+La máquina virtual 
+
 ## Archivers
 ## Accounts
 
