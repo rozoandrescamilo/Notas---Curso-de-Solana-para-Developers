@@ -19,6 +19,10 @@ Profesora Carolina Velásquez
 
 # ¿Qué es Solana?
 
+Página oficial: https://solana.com/es
+Whitepaper de Solana escrito por Anatoly Yakovenko: https://solana.com/solana-whitepaper.pdf
+Repositorio oficial en GitHub: https://github.com/solana-labs/
+
 Solana es la cadena de bloques más rápida del mundo y el ecosistema de más rápido crecimiento en criptografía, con más de 400 proyectos que abarcan DeFi, NFT, Web3 y más.
 
 La escalabilidad de Solana garantiza que las transacciones permanezcan por debajo de $ 0.01 tanto para desarrolladores como para usuarios.
@@ -48,6 +52,21 @@ PoS es determinístico, la red asigna cuales son los nodos que validarán la tra
 Solana utiliza PoS y PoH (Proof of History) para sincronizar la red y que sea más rápida.
 
 ## Proof of History (POH)
+
+PoH es una función de retardo verificable implementada como una función hash secuencial.
+
+¿Qué pasaría si en lugar de confiar en la marca de tiempo pudiera probar que el mensaje ocurrió en algún momento antes y después de un evento? Cuando tomas una fotografía con la portada del New York Times, estás creando una prueba de que tu fotografía fue tomada después de que se publicó ese periódico, o tienes alguna forma de influir en lo que publica el New York Times. Con Proof of History, puede crear un registro histórico que demuestre que un evento ha ocurrido en un momento específico en el tiempo. 
+
+La Proof of History es una función de retardo verificable de alta frecuencia. Una función de retardo verificable requiere un número específico de pasos secuenciales para evaluar, pero produce un resultado único que se puede verificar de manera eficiente y pública.
+
+[![8](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/8.png?raw=true "8")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/8.png?raw=true "8")
+
+A manera de ejemplo se menciona como funcionan las llamadas y las antenas se menciona el modelo TDMA - Acceso múltiple por división de tiempo, el ancho de banda se divide en diferentes espacios de tiempo donde cada usuario puede comunicar un mensaje.
+
+[![7](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/7.png?raw=true "7")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/7.png?raw=true "7")
+
+PoH explicado por Anatoly Yakovenko: https://medium.com/solana-labs/proof-of-history-a-clock-for-blockchain-cf47a61a9274 
+
 
 
 # Funcionamiento de Solana
