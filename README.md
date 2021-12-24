@@ -244,10 +244,58 @@ Ledger Replication: https://docs.solana.com/proposals/ledger-replication-to-impl
 
 ## Accounts
 
+En Solana todo son cuentas desde los programas hasta la información dentro de estas. Es importante tener en cuenta los siguientes componentes:
+
+- **Signers:** lista de cuentas afectadas durante una instrucción.
+- **Solo lectura:** Se pueden tener miles de procesos accediendo a la información.
+- **Ejecutabe:** No se ejecutará si no está marcado como Ejecutable.
+- **Propiedad:** Las cuentas son propiedad del programa que ejecuta.
+- **Alquiler:** Se paga alquiler por la creación de una cuenta.
 
 
 # Interacción con la red
 
 ## Clusters
+
+Son agrupaciones de computadores para un fin en especifico que se ejecutan como uno mismo. Las computadoras ayudan a verificar la salida de programas enviados por usuarios que no son de confianza. Además, podemos usar el clúster en cualquier momento que un usuario desee conservar un registro inmutable de eventos o la interpretación programática de los eventos. En Solana hay disponibles 3 clusters: Devnet, Testnet y Mainnet Beta.
+
+[![29](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/29.png?raw=true "29")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/29.png?raw=true "29")
+
+Los costos de alquiler, el costo computacional, las transacciones en la red de Solana.
+
+Asi como la unidad de divión de un Bitcoin es un Satoshi, en Solana la unidad de división es el Lamport.
+
+La devnet es para hacer pruebas y solicitar airdrops, la testnet es más utilizada por los desarrolladores como paso antes de pasar a la main, por último en la mainnet e sla red donde se ejecutan los contrato en producción con lamports de verdad.
+
 ## Clientes
+
+Son los que pertmiten interactuar con estas redes:
+
+[![30](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/30.png?raw=true "30")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/30.png?raw=true "30")
+
+**JSON RPC API:** Hace una llamada a un procedimiento de un sistema donde se hace pruebas a una API.
+
+https://docs.solana.com/developing/clients/jsonrpc-api
+
+**Solana-Web3.js:** Librería de herramientas desarrolde fácil acceso a desarrolladores. Es el más usado.
+
+https://docs.solana.com/developing/clients/javascript-api
+
+https://github.com/solana-labs/solana-program-library
+
+**Rust API:** Se pueden crear aplicaciones de diferentes tipos.
+
+https://docs.solana.com/developing/clients/rust-api
+
 ## Flujo de trabajo de desarrollo en Solana
+
+Cuando un programa es desplegado en el Runtime, este ese encarga de verificar si el bytecode es correcto y si es una cuenta ejecutable para cuando el cliente lo llame.
+
+[![31](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/31.png?raw=true "31")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/31.png?raw=true "31")
+
+Se puede ver como una estructura tradicional de cliente - servidor, donde el servidor es la red de Solana y los clientes los APIs que se conocieron antes.
+
+[![32](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/32.png?raw=true "32")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/32.png?raw=true "32")
+
+Primero el programa tiene que estar construido en Rust, C, C++ compatible con el BPF bytecode, cuando se despliega el programa en la red de Solana y se invoca se puede a través de la línea de comandos o alguno de los clientes mencionados (El RPC es muy flexible incluso se puede crear en Python, Java..). Con este cliente se llama al servidor o red de solana y por medio de las transacciones llaman a todas las instrucciones de los programas, que básicamente son querys que se hacen a la red y de esta manera se puede interctuar.
+
