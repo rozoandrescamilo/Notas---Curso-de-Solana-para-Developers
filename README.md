@@ -192,17 +192,59 @@ Lo mismo hace Solana con el proceso llamano canalización / pipelining, que es l
 
 ## Cloudbreak
 
-Es una base de datos de escalado de cuentas horizontal.
+Es una base de datos de escalado de cuentas horizontal. 
 
 Algunas blockchain utilizan LevelDB se usa como base de datos de backend para IndexedDB de Google Chrome y es uno de los backends compatibles con Riak.  Además, Bitcoin Core y go-ethereum almacenan los metadatos de la cadena de bloques utilizando una base de datos LevelDB.  Minecraft Bedrock Edition utiliza una versión modificada para el almacenamiento de datos de fragmentos y entidades.  Autodesk AutoCAD 2016 también utiliza LevelDB.
 
+Github LevelDB: https://github.com/google/leveldb
+
 La máquina virtual no puede usar uso de la fracción de la base de datos para poder lecturas y escrituras simulateneas, esto hace que tenga un límite de 5.000 transacciones por segundo. 
+
+Dataship de SSD Samsung del mercado, la SSD es 30 veces de menor costo por byte es 1.000 veces más lenta que una RAM:
 
 [![23](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/23.png?raw=true "23")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/23.png?raw=true "23")
 
+[![24](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/24.png?raw=true "24")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/24.png?raw=true "24")
+
+Los SSD modernos admiten 32 subprocesos simultáneos, por lo que pueden admitir 370.000 lecturas/segundo, o aproximadamente 185.000 tps.
+
+Las blockchain tradiconales generan un cuello de botella debido a la CPU, pero Solana utiliza Archivos mapeados de memoria y Operaciones secuenciales en vez de aleatorias.
+
+[![25](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/25.png?raw=true "25")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/25.png?raw=true "25")
+
+Características de las operaciones secuenciales:
+
+1. El índice de cuentas y bifurcaciones se almacena en la RAM.  
+2. Las cuentas se almacenan en archivos asignados en memoria de hasta 4 MB de tamaño.
+3. Cada mapa de memoria solo almacena cuentas de una única bifurcación propuesta.  
+4. Los mapas se distribuyen aleatoriamente en tantos SSD como estén disponibles.
+5. Se utiliza semántica de copy on write.  
+6. Las escrituras se agregan a un mapa de memoria aleatorio para la misma bifurcación.  
+7. El indice se actualiza después de que se completa cada escritura.
+
+[![26](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/26.png?raw=true "26")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/26.png?raw=true "26")
+
+Solana tambien tiene un Recolector de basura que elimina las bifurcaciones que llevan mucho tiempo atrasadas y sin confirmar sus transacciones.
+
+En conclusión Solana no utiliza una base de datos sino hace uso de las SSD del sistema para optimizar utilizando Archivos mapeados de memoria y Operaciones secuenciales en vez de aleatorias.
 
 ## Archivers
+
+Es el almacenamiento del libro mayor distribuido.
+
+Se utilizan para almacenar datos. Descargan los datos de los validadores de consenso. La tecnología PoH permite la implementación de Proof-of-Replication (PoRep), para la verificación por lotes, en millones de nodos Replicator en todo el mundo. Los archivadores le dicen a la red cuántos bytes tienen disponibles para almacenamiento. Según el almacenamiento total disponible de Archiver y la cantidad de identidades de Replicator, la red divide el ledger en las partes correctas para que coincida con la tasa de replicación y la tolerancia a fallas. Los archivadores reciben una recompensa de aproximadamente el 3% de la inflación por el esfuerzo de almacenamiento.
+
+Mejor explicación de PoRep: https://filecoin.io/ 
+
+[![27](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/27.png?raw=true "27")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/27.png?raw=true "27")
+
+[![28](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/28.png?raw=true "28")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/28.png?raw=true "28")
+
+Ledger Replication: https://docs.solana.com/proposals/ledger-replication-to-implement
+
 ## Accounts
+
+
 
 # Interacción con la red
 
