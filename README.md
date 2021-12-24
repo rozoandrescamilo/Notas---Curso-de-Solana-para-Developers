@@ -196,7 +196,10 @@ Es una base de datos de escalado de cuentas horizontal.
 
 Algunas blockchain utilizan LevelDB se usa como base de datos de backend para IndexedDB de Google Chrome y es uno de los backends compatibles con Riak.  Además, Bitcoin Core y go-ethereum almacenan los metadatos de la cadena de bloques utilizando una base de datos LevelDB.  Minecraft Bedrock Edition utiliza una versión modificada para el almacenamiento de datos de fragmentos y entidades.  Autodesk AutoCAD 2016 también utiliza LevelDB.
 
-La máquina virtual 
+La máquina virtual no puede usar uso de la fracción de la base de datos para poder lecturas y escrituras simulateneas, esto hace que tenga un límite de 5.000 transacciones por segundo. 
+
+[![23](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/23.png?raw=true "23")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/23.png?raw=true "23")
+
 
 ## Archivers
 ## Accounts
