@@ -10,17 +10,28 @@ Profesora Carolina Velásquez
 - [¿Qué es Solana?](#qué-es-solana)
   - [Proof of History (POH)](#proof-of-history-poh) 
 - [Funcionamiento de Solana](#introducción-a-la-programación-con-solidity)
-  - [Estructura de un contrato](#estructura-de-un-contrato)
-- [Funciones](#funciones) 
-- [Gestionando costos](#gestionando-costos)
-- [Conceptos avanzados](#conceptos-avanzados)
+  - [Tower BFT](#tower-bft)
+  - [Turbine](#turbine) 
+  - [Gulf Stream](#gulf-stream)
+  - [Sealevel](#sealevel)
+  - [Pipelining](#pipelining)
+  - [Cloudbreak](#cloudbreak)
+  - [Archivers](#archivers)
+  - [Accounts](#accounts)
+- [Interacción con la red](#interacción-con-la-red)
+  - [Clusters](#clusters)
+  - [Clientes](#clientes)
+  - [Flujo de trabajo de desarrollo en Solana](#flujo-de-trabajo-de-desarrollo-en-solana)
+  
 
 [![1](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/1.jpg?raw=true "1")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/1.jpg?raw=true "1")
 
 # ¿Qué es Solana?
 
 Página oficial: https://solana.com/es
+
 Whitepaper de Solana escrito por Anatoly Yakovenko: https://solana.com/solana-whitepaper.pdf
+
 Repositorio oficial en GitHub: https://github.com/solana-labs/
 
 Solana es la cadena de bloques más rápida del mundo y el ecosistema de más rápido crecimiento en criptografía, con más de 400 proyectos que abarcan DeFi, NFT, Web3 y más.
@@ -55,7 +66,7 @@ Solana utiliza PoS y PoH (Proof of History) para sincronizar la red y que sea m�
 
 PoH es una función de retardo verificable implementada como una función hash secuencial.
 
-¿Qué pasaría si en lugar de confiar en la marca de tiempo pudiera probar que el mensaje ocurrió en algún momento antes y después de un evento? Cuando tomas una fotografía con la portada del New York Times, estás creando una prueba de que tu fotografía fue tomada después de que se publicó ese periódico, o tienes alguna forma de influir en lo que publica el New York Times. Con Proof of History, puede crear un registro histórico que demuestre que un evento ha ocurrido en un momento específico en el tiempo. 
+¿Qué pasaría si en lugar de confiar en la marca de tiempo pudiera probar que el mensaje ocurrió en algún momento antes y después de un evento? Cuando te tomas una fotografía con la portada del New York Times, estás creando una prueba de que tu fotografía fue tomada después de que se publicó ese periódico, o tienes alguna forma de influir en lo que publica el New York Times. Con Proof of History, puede crear un registro histórico que demuestre que un evento ha ocurrido en un momento específico en el tiempo. 
 
 La Proof of History es una función de retardo verificable de alta frecuencia. Una función de retardo verificable requiere un número específico de pasos secuenciales para evaluar, pero produce un resultado único que se puede verificar de manera eficiente y pública.
 
@@ -67,6 +78,67 @@ A manera de ejemplo se menciona como funcionan las llamadas y las antenas se men
 
 PoH explicado por Anatoly Yakovenko: https://medium.com/solana-labs/proof-of-history-a-clock-for-blockchain-cf47a61a9274 
 
-
-
 # Funcionamiento de Solana
+
+## Tower BFT
+
+Byzantine Fault Tolerance garantiza una tolerancia a fallos del sistema, si una parte del sistema (procesador) falla las demás partes deben seguir funcionando.
+
+[![9](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/9.png?raw=true "9")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/9.png?raw=true "9")
+
+Tower BFT es un protocolo de tolerancia a fallas bizantinas que combinado con Proof of History ayuda a mantener el funcionamiento seguro de su protocolo de consenso y red descentralizada. Tower BFT, es una evolución de Practical Bizantine Fault Tolerance (PBFT) un protocolo de tolerancia a fallas bizantinas bien conocido en el mundo de la computación distribuida.
+
+[![10](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/10.png?raw=true "10")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/10.png?raw=true "10")
+
+Tower BFT por Anatoly Yakovenko: https://medium.com/solana-labs/tower-bft-solanas-high-performance-implementation-of-pbft-464725911e79
+
+## Turbine
+
+Es un método de propagación de transacciones en Solana.
+
+Ejemplo de red tradicional :
+
+[![11](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/11.png?raw=true "11")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/11.png?raw=true "11")
+
+Enviar 128 MB a 20.000 validadores puede ser complicado en la red tradicional de Bitcoin, pero Solana basandose en el protocolo de **BitTorrent** logra solucionar este problema.
+
+Hay dos conceptos clave en BitTorrent: el TCP donde la comunición esta orientada a conexión con una línea directa para enviar un mensaje, y el UDP que es una conexión orientada a enviar el mensaje por paquetes. Este último es donde Solana hace lo mismo con la información que pasa por su red.
+
+[![12](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/12.png?raw=true "12")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/12.png?raw=true "12")
+
+En la red de Solana el líder divide el bloque en paquetes de hasta 64 KB de tamaño.  Para un bloque de 128 MB, el líder produce 2000 paquetes de 64 KB y transmite cada paquete a un validador diferente.
+
+[![13](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/13.png?raw=true "13")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/13.png?raw=true "13")
+
+¿Que pasa si hackers quieren apoderarse de la red y hacer una ataque eclipse?
+
+**Ataque eclipse: Busca desconectar a la víctima del flujo de datos válido de la red. Esto con el propósito de que la víctima reciba datos manipulados por la parte del atacante. 
+
+Para prevenir esto en la red se envían datos cifrados sobre cual será el próximo nodo donde irá la información, se tendría que hackear o alterar todos los nodos a la vez para poder vulnerarla.
+
+## Gulf Stream
+
+Primero hay que entender el concepto de **mempool** que son la cantidad de transacciones sin confirmar dentro de la red, en Bitcoin se encuentra en 10.000 - 20.000. Para esto Solana creó el protocolo Gulf Stream que es un reenvío de transacciones sin mempool.
+
+[![14](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/14.png?raw=true "14")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/14.png?raw=true "14")
+
+Gulf Stream es un protocolo de almacenamiento en cache de las transacciones de la red. Es el encargado de recibir la transacción y mandarla a todos los nodos, priorizando a los nodos generadores. Permite a todos los nodos de la red acceder a la información necesaria para la recreación de los bloques, lo que ayuda a los validadores a confirmar las transacciones antes de que se finalice el siguiente bloque, reduciendo los tiempos de confirmación y permite un volumen de transacciones sustancial.
+
+Suponiendo que un bloque se genera cada 800 ms, para que un bloque sea totalmente validado es necesario un TTL - Time to Live (# de bloques que tiene ~ 32 bloques) significa que en 24 s la transacción va estar totalmente validada.
+
+[![15](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/15.png?raw=true "15")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/15.png?raw=true "15")
+
+## Sealevel
+
+
+
+## Pipelining
+## Cloudbreak
+## Archivers
+## Accounts
+
+# Interacción con la red
+
+## Clusters
+## Clientes
+## Flujo de trabajo de desarrollo en Solana
