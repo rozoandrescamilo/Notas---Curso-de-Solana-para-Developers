@@ -48,6 +48,10 @@ Es la red blockchain más rápida del mercado con 50.000 transacciones por segun
 
 [![3](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/3.png?raw=true "3")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/3.png?raw=true "3")
 
+Visa vs Solana en nivel de transacciones:
+
+[![3,5](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/3,5.jpg?raw=true "3")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/3,5.jpg?raw=true "3,5")
+
 Comparativa de uso de energía en una sola transacción en Solana medida en Julios:
 
 [![4](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/4.png?raw=true "4")](https://github.com/hackmilo/Notas---Curso-de-Solana-para-Developers/blob/main/img/4.png?raw=true "4")
